@@ -1,9 +1,9 @@
-
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { AddToCartButton } from './AddToCartButton';
 import { fetchProducts } from './productsSlice';
 import styles from './ProductsList.module.css';
+import {Link} from "react-router-dom";
 
 export const ProductsList = () => {
   // Получаем товары из Redux store
@@ -25,7 +25,7 @@ export const ProductsList = () => {
   }
 
    if (products.length === 0) {
-    return <div className="text-center py-8">No products available</div>;
+    return <div className="text-center py-8">Товары не найдены</div>;
   }
 
   return (
@@ -37,7 +37,9 @@ export const ProductsList = () => {
             alt={product.title} 
             className={styles.productImage}
           />
-          <h3 className={styles.productTitle}>{product.title}</h3>
+          <Link to={`/products/${product.id}`} className="font-semibold mt-2 hover:text-blue-500">
+            {product.title}
+          </Link>
           <p className={styles.productPrice}>${product.price}</p>
           <AddToCartButton product={product} />
         </div>

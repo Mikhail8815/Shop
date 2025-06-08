@@ -53,7 +53,16 @@ button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
+.loading {
+  text-align: center;
+  padding: 2rem 0;
+}
 
+.error {
+  text-align: center;
+  padding: 2rem 0;
+  color: #ef4444;
+}
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;

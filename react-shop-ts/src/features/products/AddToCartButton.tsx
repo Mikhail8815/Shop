@@ -12,7 +12,7 @@ export const AddToCartButton = ({ product }: Props) => {
       onClick={() => dispatch(addToCart(product))}
       className={styles.button}
     >
-      Add to Cart
+      Добавить в корзину
     </button>
   );
 };

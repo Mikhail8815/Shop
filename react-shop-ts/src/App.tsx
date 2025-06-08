@@ -4,6 +4,7 @@ import { CartPage } from './features/cart/CartPage';
 import { Link } from 'react-router-dom';
 import { ProductsList } from './features/products/ProductsList';
 import styles from './App.module.css';
+import {ProductDetail} from "./features/products/ProductDetail.tsx";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <main className={styles.mainContent}>
           <Routes>
             <Route path="/" element={<ProductsList/>} />
+            <Route path="/products/:id" element={<ProductDetail />} />
             <Route path="/cart" element={<CartPage />} />
           </Routes>
         </main>

@@ -9,8 +9,8 @@ export const CartPage = () => {
   const total = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
   return (
-    <div className={styles.cartContainer}>
-      <h2 className={styles.cartTitle}>Ваша корзина</h2>
+    <div className={styles.container}>
+      <h2 className={styles.title}>Ваша корзина</h2>
       {items.map(item => (
         <div key={item.id} className={styles.cartItem}>
           <span>{item.title}</span>
@@ -35,7 +35,7 @@ export const CartPage = () => {
           </div>
         </div>
       ))}
-      <div className={styles.total}>Total: ${total.toFixed(2)}</div>
+      <div className={styles.total}>Итого: ${total.toFixed(2)}</div>
       <button 
         onClick={() => dispatch(clearCart())}
         className={styles.clearButton}
