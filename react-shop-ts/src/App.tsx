@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { ProductsList } from './features/products/ProductsList';
 import styles from './App.module.css';
 import {ProductDetail} from "./features/products/ProductDetail.tsx";
+import { CartIcon } from './components/CartIcon.tsx';
 
 function App() {
   return (
@@ -13,7 +14,10 @@ function App() {
         <nav className={styles.nav}>
           <div className={styles.navContent}>
             <Link to="/" className={styles.navLink}>Товары</Link>
-            <Link to="/cart" className={styles.navLink}>Корзина</Link>
+            <Link to="/cart" className={`${styles.navLink} ${styles.cartLink}`}>
+            <CartIcon/>
+            <span>Корзина</span>
+            </Link>
           </div>
         </nav>
         

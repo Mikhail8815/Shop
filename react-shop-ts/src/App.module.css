@@ -27,12 +27,16 @@
 
 /* Ссылки навигации */
 .navLink {
+   display: flex;
+  align-items: center;
+  gap: 0.5rem;
   text-decoration: none;
   color: #333;
   font-weight: 500;
   padding: 0.5rem 1rem;
   border-radius: 4px;
   transition: all 0.3s ease;
+  position: relative;
 }
 
 .navLink:hover {
@@ -42,6 +46,12 @@
 .navLink.active {
   background-color: #007bff;
   color: white;
+}
+
+.cartLink {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 /* Основное содержимое */

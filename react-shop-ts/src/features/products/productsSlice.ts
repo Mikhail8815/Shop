@@ -57,6 +57,7 @@ const productsSlice = createSlice({
           state.selectedProduct = action.payload;
         })
         .addCase(fetchProductById.rejected, (state, action) => {
+          debugger
           state.status = 'failed';
           state.error = action.payload as string;
         });

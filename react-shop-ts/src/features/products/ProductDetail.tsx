@@ -17,11 +17,11 @@ export const ProductDetail = () => {
     }, [id, dispatch]);
 
     if (status === 'loading') {
-        return <div className="text-center py-8">Loading product details...</div>;
+        return <div className="text-center py-8">Загружаем информацию о товаре...</div>;
     }
 
     if (!selectedProduct) {
-        return <div className="text-center py-8">Product not found</div>;
+        return <div className="text-center py-8">Товар не найден</div>;
     }
 
     return (

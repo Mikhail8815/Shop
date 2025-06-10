@@ -17,11 +17,11 @@ export const ProductsList = () => {
   }, [status, dispatch]);
 
   if (status === 'loading') {
-    return <div>Loading products...</div>;
+    return <div>Загружаем товары...</div>;
   }
 
   if (status === 'failed') {
-    return <div>Error loading products</div>;
+    return <div>Ошибка загрузки товаров</div>;
   }
 
    if (products.length === 0) {
