@@ -14,6 +14,10 @@ export interface Product {
 export interface ProductsState {
   items: Product[];
   selectedProduct: Product | null;
-  status: 'idle' | 'loading' | 'succeeded' | 'failed';
+  status: LoadingStatus;
   error: string | null;
+  categories: string[],
+  selectedCategory: string
 }
+
+export type LoadingStatus =  'idle' | 'loading' | 'succeeded' | 'failed'

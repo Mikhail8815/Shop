@@ -1,11 +1,13 @@
 import {createSlice, createAsyncThunk, type PayloadAction} from '@reduxjs/toolkit';
 import axios from 'axios';
-import type { Product, ProductsState } from './types';
+import type { LoadingStatus, Product, ProductsState } from './types';
 
 const initialState: ProductsState = {
-  items: [],
+  items: [] as Product[],
   selectedProduct: null,
-  status: 'idle',
+  categories: [] as string[],
+  selectedCategory: '',
+  status: 'idle'as LoadingStatus,
   error: null,
 };
 
@@ -35,15 +37,24 @@ export const fetchProductById = createAsyncThunk<Product, number>(
 const productsSlice = createSlice({
   name: 'products',
   initialState,
-  reducers: {},
+  reducers: {
+      setCategory: (state, action: PayloadAction<string>) => {
+      state.selectedCategory = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchProducts.pending, (state) => {
         state.status = 'loading';
       })
       .addCase(fetchProducts.fulfilled, (state, action) => {
-        state.status = 'succeeded';
-        state.items = action.payload;
+        const categories = Array.from(new Set(action.payload.map(p => p.category)));
+      return {
+        ...state,
+        items: action.payload,
+        categories,
+        status: 'succeeded'
+      };
       })
       .addCase(fetchProducts.rejected, (state, action) => {
         state.status = 'failed';
@@ -65,3 +76,4 @@ const productsSlice = createSlice({
 });
 
 export const productsReducer = productsSlice.reducer;
+export const { setCategory } = productsSlice.actions;

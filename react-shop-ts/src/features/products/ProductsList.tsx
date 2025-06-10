@@ -4,11 +4,12 @@ import { AddToCartButton } from './AddToCartButton';
 import { fetchProducts } from './productsSlice';
 import styles from './ProductsList.module.css';
 import {Link} from "react-router-dom";
+import { CategoryFilter } from '../../components/CategoryFilter';
 
 export const ProductsList = () => {
-  // Получаем товары из Redux store
+
    const dispatch = useAppDispatch();
-  const { items: products, status } = useAppSelector(state => state.products);
+  const { items: products, status, selectedCategory } = useAppSelector(state => state.products);
 
   useEffect(() => {
     if (status === 'idle') {
@@ -28,9 +29,15 @@ export const ProductsList = () => {
     return <div className="text-center py-8">Товары не найдены</div>;
   }
 
+  const filteredProducts = selectedCategory
+    ? products.filter(product => product.category === selectedCategory)
+    : products
+
   return (
+    <>
+    <CategoryFilter />
     <div className={styles.productsGrid}>
-      {products.map(product => (
+      {filteredProducts.map(product => (
         <div key={product.id} className={styles.productCard}>
           <img 
             src={product.image} 
@@ -45,5 +52,6 @@ export const ProductsList = () => {
         </div>
       ))}
     </div>
+    </>
   );
 };
