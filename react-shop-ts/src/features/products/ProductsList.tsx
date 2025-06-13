@@ -5,6 +5,7 @@ import { fetchProducts } from './productsSlice';
 import styles from './ProductsList.module.css';
 import {Link} from "react-router-dom";
 import { CategoryFilter } from '../../components/CategoryFilter';
+import { ProductRating } from './ProductRating';
 
 export const ProductsList = () => {
 
@@ -48,6 +49,7 @@ export const ProductsList = () => {
             {product.title}
           </Link>
           <p className={styles.productPrice}>${product.price}</p>
+          {product.rating && <ProductRating rating={product.rating} showCount={false} />}
           <AddToCartButton product={product} />
         </div>
       ))}

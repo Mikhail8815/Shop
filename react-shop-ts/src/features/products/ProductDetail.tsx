@@ -4,6 +4,8 @@ import { AddToCartButton } from './AddToCartButton';
 import { useEffect } from 'react';
 import { fetchProductById } from './productsSlice';
 import styles from './ProductDetail.module.css';
+import { ProductReviews } from '../reviews/ProductReviews';
+import { ProductRating } from './ProductRating';
 
 export const ProductDetail = () => {
     const { id } = useParams<{ id: string }>();
@@ -27,19 +29,29 @@ export const ProductDetail = () => {
     return (
         <div className={styles.container}>
             <div className={styles.grid}>
-                <div className={styles.imageContainer}>
-                    <img
-                        src={selectedProduct.image}
-                        alt={selectedProduct.title}
-                        className={styles.image}
-                    />
+                <div className={styles.imageColumn}>
+                    <div className={styles.imageContainer}>
+                        <img
+                            src={selectedProduct.image}
+                            alt={selectedProduct.title}
+                            className={styles.image}
+                        />
+                    </div>
                 </div>
-                <div>
-                    <h1 className={styles.title}>{selectedProduct.title}</h1>
-                    <p className={styles.category}>{selectedProduct.category}</p>
-                    <p className={styles.price}>${selectedProduct.price.toFixed(2)}</p>
-                    <p className={styles.description}>{selectedProduct.description}</p>
-                    <AddToCartButton product={selectedProduct} />
+
+                <div className={styles.infoColumn}>
+                    <div className={styles.productInfo}>
+                        <h1 className={styles.title}>{selectedProduct.title}</h1>
+                        <p className={styles.category}>{selectedProduct.category}</p>
+                        <p className={styles.price}>${selectedProduct.price.toFixed(2)}</p>
+                        {selectedProduct.rating && <ProductRating rating={selectedProduct.rating} />}
+                        <p className={styles.description}>{selectedProduct.description}</p>
+                        <AddToCartButton product={selectedProduct} />
+                    </div>
+
+                    <div className={styles.reviewsContainer}>
+                        <ProductReviews productId={selectedProduct.id} />
+                    </div>
                 </div>
             </div>
         </div>

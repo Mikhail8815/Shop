@@ -20,4 +20,13 @@ export interface ProductsState {
   selectedCategory: string
 }
 
+export interface Review {
+  id: string;       
+  productId: number; 
+  author: string;    
+  rating: number;    
+  text: string;      
+  date: string;      
+}
+
 export type LoadingStatus =  'idle' | 'loading' | 'succeeded' | 'failed'

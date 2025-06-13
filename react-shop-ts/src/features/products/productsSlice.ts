@@ -48,7 +48,9 @@ const productsSlice = createSlice({
         state.status = 'loading';
       })
       .addCase(fetchProducts.fulfilled, (state, action) => {
+        console.log(new Set(action.payload.map(p => p.category)))
         const categories = Array.from(new Set(action.payload.map(p => p.category)));
+        console.log(categories)
       return {
         ...state,
         items: action.payload,
