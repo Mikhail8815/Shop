@@ -16,7 +16,7 @@ export const ProductReviews = ({ productId }: Props) => {
     rating: 5,
     text: '',
   });
-
+   
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     dispatch(addReview({ productId, ...newReview }));

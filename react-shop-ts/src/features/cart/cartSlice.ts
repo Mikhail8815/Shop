@@ -5,13 +5,21 @@ interface CartItem extends Product {
   quantity: number;
 }
 
-interface CartState {
+export interface CartState {
   items: CartItem[];
 }
 
-const initialState: CartState = {
-  items: [],
+
+const loadCart = (): CartState => {
+  try {
+    const saved = localStorage.getItem('cart');
+    return saved ? JSON.parse(saved) : { items: [] };
+  } catch {
+    return { items: [] };
+  }
 };
+
+const initialState: CartState = loadCart();
 
 const cartSlice = createSlice({
   name: 'cart',
@@ -42,6 +50,7 @@ const cartSlice = createSlice({
     },
   },
 });
+
 
 export const { addToCart, removeFromCart, updateQuantity, clearCart } = cartSlice.actions;
 export const cartReducer = cartSlice.reducer

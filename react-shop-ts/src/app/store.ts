@@ -2,7 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { productsReducer } from '../features/products/productsSlice';
 import { cartReducer } from '../features/cart/cartSlice';
 import { reviewsReducer } from '../features/reviews/reviewsSlice';
-
+import { saveCartMiddleware } from '../features/cart/cartMiddleware';
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +10,8 @@ export const store = configureStore({
     cart: cartReducer,
     reviews: reviewsReducer
   }, 
+    middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(saveCartMiddleware),
 });
 
 // Типы для работы с хуками
