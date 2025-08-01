@@ -6,6 +6,7 @@ import { ProductsList } from './features/products/ProductsList';
 import styles from './App.module.css';
 import {ProductDetail} from "./features/products/ProductDetail.tsx";
 import { CartIcon } from './components/CartIcon.tsx';
+import { CheckoutPage } from './features/checkout/CheckoutPage.tsx';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
             <Route path="/" element={<ProductsList/>} />
             <Route path="/products/:id" element={<ProductDetail />} />
             <Route path="/cart" element={<CartPage />} />
+            <Route path="/checkout" element={<CheckoutPage />} />
           </Routes>
         </main>
       </div>
