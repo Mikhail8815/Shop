@@ -1,14 +1,14 @@
+import { useAppSelector } from "../../hooks";
 import { DeliveryForm } from "./DeliveryForm"
-import { OrderSummary } from "./OrderSummary"
 import { PaymentMethod } from "./PaymentMethod"
 
 export const CheckoutPage = () => {
-    let step: 1 | 2| 3 = 2
-    return (
-        <div>
-            {step === 1 && <OrderSummary/>}
-            {step === 2 && <DeliveryForm/>}
-            {step === 3 && <PaymentMethod/>}
-        </div>
-    )
-}
+  const { step } = useAppSelector(state => state.checkout);
+  
+  return (
+    <div className="checkout-container">
+      {step === 1 && <DeliveryForm />}
+      {step === 2 && <PaymentMethod />}
+    </div>
+  );
+};
