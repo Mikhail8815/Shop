@@ -31,11 +31,44 @@
   font-weight: 700;
   margin-top: 1rem;
 }
+.buttonsWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Выравнивание по центру */
+  gap: 0.5rem;
+  margin-top: 1rem;
+  width: 100%;
+}
+
+.clearButton, .checkoutButton {
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  font-weight: 600;
+  width: 200px; 
+  text-align: center;
+  border: none;
+  cursor: pointer;
+}
 
 .clearButton {
   background-color: #ef4444;
   color: white;
-  padding: 0.5rem 1rem;
-  border-radius: 0.25rem;
-  margin-top: 0.5rem;
+}
+
+.clearButton:hover {
+  background-color: #dc2626;
+}
+
+.checkoutButton {
+  background-color: #3b82f6;
+  color: white;
+}
+
+.checkoutButton:disabled {
+  background-color: #9ca3af;
+  cursor: not-allowed;
+}
+
+.checkoutButton:not(:disabled):hover {
+  background-color: #2563eb;
 }

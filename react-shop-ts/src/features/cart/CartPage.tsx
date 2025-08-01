@@ -1,12 +1,14 @@
 import { useAppSelector, useAppDispatch } from '../../hooks';
 import { removeFromCart, updateQuantity, clearCart } from './cartSlice';
 import styles from './CartPage.module.css';
+import { useNavigate } from 'react-router-dom';
 
 export const CartPage = () => {
   const { items } = useAppSelector(state => state.cart);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
-  const total = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+ const total = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
   return (
     <div className={styles.container}>
@@ -36,12 +38,22 @@ export const CartPage = () => {
         </div>
       ))}
       <div className={styles.total}>Итого: ${total.toFixed(2)}</div>
-      <button 
+      <div className={styles.buttonsWrapper}>
+        <button 
         onClick={() => dispatch(clearCart())}
         className={styles.clearButton}
       >
         Очистить корзину
       </button>
+      <button 
+        onClick={() => navigate('/checkout')}
+        disabled={items.length === 0}
+        className={styles.checkoutButton}
+      >
+        Оформить заказ
+      </button>
+      </div>
+      
     </div>
   );
 };
