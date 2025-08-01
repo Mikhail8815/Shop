@@ -23,6 +23,26 @@ export const DeliveryForm = () => {
         {...register('lastName', { required: 'Обязательное поле' })}
         placeholder="Фамилия"
       />
+        <input
+        {...register('city', { required: 'Обязательное поле' })}
+        placeholder="Город"
+      />
+        <input
+        {...register('address', { required: 'Обязательное поле' })}
+        placeholder="Адрес"
+      />
+        <input
+        {...register('postalCode', { required: 'Обязательное поле' })}
+        placeholder="Индекс"
+      />
+        <input
+        {...register('phone', { required: 'Обязательное поле' })}
+        placeholder="Телефон"
+      />
+        <input
+        {...register('email', { required: 'Обязательное поле' })}
+        placeholder="E-mail"
+      />
 
   
       <button type="submit">Продолжить</button>
