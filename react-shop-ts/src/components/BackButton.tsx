@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import styles from './BackButton.module.css';
 
 type BackButtonProps = {
     onClick?: () => void;
@@ -23,9 +24,9 @@ export const BackButton = ({ onClick, className = '', children = 'Назад' }:
     return (
         <button
             onClick={handleClick}
-            className={`flex items-center gap-2 px-4 py-2 text-gray-700 hover:text-gray-900 transition-colors ${className}`}
+            className={`${styles.button} ${className}`}
         >
-            <FontAwesomeIcon icon={faArrowLeft} className="h-4 w-4" />
+            <FontAwesomeIcon icon={faArrowLeft} className={styles.icon} />
             {children}
         </button>
     );

@@ -5,6 +5,7 @@ import {OrderSummary} from "./OrderSummary.tsx";
 import {placeOrder, prevStep} from "./checkoutSlice.ts";
 import {OrderConfirmation} from "./OrderConfirmation.tsx";
 import {BackButton} from "../../components/BackButton.tsx";
+import styles from './CheckoutPage.module.css';
 
 type DeliveryRules = {
   freeThreshold: number;
@@ -41,27 +42,46 @@ export const CheckoutPage = () => {
   };
   
   return (
-    <div className="checkout-container">
+    <div className={styles.checkoutContainer}>
       {step > 1 && step < 4 && (
-          <div className="absolute left-4 top-4 z-10">
+          <div className={styles.backButtonContainer}>
             <BackButton
                 onClick={handleGoBack}
                 className="text-sm font-medium"
             />
           </div>
       )}
-      {step === 1 && <DeliveryForm />}
-      {step === 2 && <PaymentMethod />}
-      {step === 3 && (
-          <OrderSummary
-              items={items}
-              total={total}
-              subtotal={subtotal}
-              onPlaceOrder={handlePlaceOrder}
-              deliveryCost={deliveryCost}
-          />
-      )}
-      {step === 4 && <OrderConfirmation />}
+      <div className={styles.checkoutContainer}>
+        {step === 1 && (
+            <div className={styles.checkoutStep}>
+              <DeliveryForm />
+            </div>
+        )}
+
+        {step === 2 && (
+            <div className={styles.checkoutStep}>
+              <PaymentMethod />
+            </div>
+        )}
+
+        {step === 3 && (
+            <div className={styles.checkoutStep}>
+              <OrderSummary
+                  items={items}
+                  total={total}
+                  subtotal={subtotal}
+                  onPlaceOrder={handlePlaceOrder}
+                  deliveryCost={deliveryCost}
+              />
+            </div>
+        )}
+
+        {step === 4 && (
+            <div className={styles.checkoutStep}>
+              <OrderConfirmation />
+            </div>
+        )}
+      </div>
     </div>
   );
 };

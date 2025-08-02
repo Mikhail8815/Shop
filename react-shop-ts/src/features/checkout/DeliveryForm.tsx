@@ -1,19 +1,34 @@
 import { useForm } from 'react-hook-form';
-import { setDeliveryData } from './checkoutSlice';
+import {setDeliveryData} from './checkoutSlice';
 import type { DeliveryData } from './types';
-import { useAppDispatch } from '../../hooks';
+import {useAppDispatch, useAppSelector} from '../../hooks';
 import styles from './DeliveryForm.module.css';
+import {useEffect} from "react";
+import {BackButton} from "../../components/BackButton.tsx";
+import {useNavigate} from "react-router-dom";
 
 export const DeliveryForm = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm<DeliveryData>();
+    const navigate = useNavigate();
+    const { delivery } = useAppSelector(state => state.checkout);
+  const { register, handleSubmit, formState: { errors }, reset } = useForm<DeliveryData>();
   const dispatch = useAppDispatch();
 
   const onSubmit = (data: DeliveryData) => {
     dispatch(setDeliveryData(data));
   };
 
+    useEffect(() => {
+        if (delivery) {
+            reset(delivery);
+        }
+    }, [delivery, reset]);
+
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
+        <BackButton
+            onClick={() => navigate('/')} // Переход на главную страницу
+            className={styles.backButton}
+        />
         <div className={styles.form}>
             <input
                 {...register('firstName', {required: 'Обязательное поле'})}
@@ -59,7 +74,6 @@ export const DeliveryForm = () => {
             />
             {errors.email && <span className={styles.error}>{errors.email.message}</span>}
         </div>
-
 
         <button type="submit" className={styles.submitButton}>Продолжить</button>
     </form>
