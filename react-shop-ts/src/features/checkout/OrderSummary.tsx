@@ -5,10 +5,14 @@ import type {CartItem} from "../cart/cartSlice.ts";
 type OrderSummaryProps = {
     items: CartItem[];
     total: number;
+    subtotal: number;
+    deliveryCost: number,
     onPlaceOrder: () => void;
 };
 
-export const OrderSummary = ({ items, total, onPlaceOrder }: OrderSummaryProps) => {
+const FREE_DELIVERY_THRESHOLD = 100
+
+export const OrderSummary = ({ items, total, subtotal, deliveryCost, onPlaceOrder }: OrderSummaryProps) => {
     return (
         <div className={styles.container}>
             <h2>Проверьте ваш заказ</h2>
@@ -33,11 +37,14 @@ export const OrderSummary = ({ items, total, onPlaceOrder }: OrderSummaryProps) 
             <div className={styles.summary}>
                 <div className={styles.summaryRow}>
                     <span>Товары:</span>
-                    <span>${(total * 0.95).toFixed(2)}</span>
+                    <span>${subtotal.toFixed(2)}</span>
                 </div>
                 <div className={styles.summaryRow}>
                     <span>Доставка:</span>
-                    <span>$5.00</span>
+                    <span> {deliveryCost === 0
+                        ? `Бесплатно (заказ от $${FREE_DELIVERY_THRESHOLD})`
+                        : `$${deliveryCost.toFixed(2)}`
+                    }</span>
                 </div>
                 <div className={styles.summaryRowTotal}>
                     <span>Итого:</span>
