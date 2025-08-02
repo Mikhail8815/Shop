@@ -47,6 +47,11 @@ const checkoutSlice = createSlice({
       };
       state.step = 4;
     },
+    prevStep(state) {
+      if (state.step > 1) {
+        state.step -= 1;
+      }
+    },
     resetCheckout(state) {
       Object.assign(state, initialState);
     },
@@ -58,6 +63,7 @@ export const {
   setPaymentMethod, 
   placeOrder,
   resetCheckout,
+    prevStep
 } = checkoutSlice.actions;
 
 export const checkoutReducer = checkoutSlice.reducer;

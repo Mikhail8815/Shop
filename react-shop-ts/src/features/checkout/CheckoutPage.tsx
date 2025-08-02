@@ -2,8 +2,9 @@ import {useAppDispatch, useAppSelector} from "../../hooks";
 import { DeliveryForm } from "./DeliveryForm"
 import { PaymentMethod } from "./PaymentMethod"
 import {OrderSummary} from "./OrderSummary.tsx";
-import {placeOrder} from "./checkoutSlice.ts";
+import {placeOrder, prevStep} from "./checkoutSlice.ts";
 import {OrderConfirmation} from "./OrderConfirmation.tsx";
+import {BackButton} from "../../components/BackButton.tsx";
 
 type DeliveryRules = {
   freeThreshold: number;
@@ -32,9 +33,23 @@ export const CheckoutPage = () => {
   const handlePlaceOrder = () => {
     dispatch(placeOrder({ items, total, subtotal, deliveryCost }));
   };
+
+  const handleGoBack = () => {
+    if (step > 1) {
+      dispatch(prevStep());
+    }
+  };
   
   return (
     <div className="checkout-container">
+      {step > 1 && step < 4 && (
+          <div className="absolute left-4 top-4 z-10">
+            <BackButton
+                onClick={handleGoBack}
+                className="text-sm font-medium"
+            />
+          </div>
+      )}
       {step === 1 && <DeliveryForm />}
       {step === 2 && <PaymentMethod />}
       {step === 3 && (
