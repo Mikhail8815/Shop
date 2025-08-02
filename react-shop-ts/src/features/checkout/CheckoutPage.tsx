@@ -3,6 +3,7 @@ import { DeliveryForm } from "./DeliveryForm"
 import { PaymentMethod } from "./PaymentMethod"
 import {OrderSummary} from "./OrderSummary.tsx";
 import {placeOrder} from "./checkoutSlice.ts";
+import {OrderConfirmation} from "./OrderConfirmation.tsx";
 
 type DeliveryRules = {
   freeThreshold: number;
@@ -45,6 +46,7 @@ export const CheckoutPage = () => {
               deliveryCost={deliveryCost}
           />
       )}
+      {step === 4 && <OrderConfirmation />}
     </div>
   );
 };
