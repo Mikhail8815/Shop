@@ -10,7 +10,7 @@ import { CheckoutPage } from './features/checkout/CheckoutPage.tsx';
 
 function App() {
   return (
-    <BrowserRouter basename="/react-shop-ts">
+    <BrowserRouter>
       <div className={styles.app}>
         <nav className={styles.nav}>
           <div className={styles.navContent}>
