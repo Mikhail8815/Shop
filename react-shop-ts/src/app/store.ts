@@ -4,6 +4,7 @@ import { cartReducer } from '../features/cart/cartSlice';
 import { reviewsReducer } from '../features/reviews/reviewsSlice';
 import { saveCartMiddleware } from '../features/cart/cartMiddleware';
 import { checkoutReducer } from '../features/checkout/checkoutSlice';
+import { authReducer } from '../features/auth/authSlice';
 
 export const store = configureStore({
   reducer: {
@@ -11,6 +12,7 @@ export const store = configureStore({
     cart: cartReducer,
     reviews: reviewsReducer,
     checkout: checkoutReducer,
+    auth: authReducer
   }, 
     middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(saveCartMiddleware),
