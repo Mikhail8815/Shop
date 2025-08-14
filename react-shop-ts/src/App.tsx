@@ -8,6 +8,7 @@ import {ProductDetail} from "./features/products/ProductDetail.tsx";
 import { CartIcon } from './components/CartIcon.tsx';
 import { CheckoutPage } from './features/checkout/CheckoutPage.tsx';
 import { LoginForm } from './features/auth/LoginForm.tsx';
+import { RegisterForm } from './features/auth/RegisterForm.tsx';
 
 function App() {
   return (
@@ -30,6 +31,8 @@ function App() {
             <Route path="/cart" element={<CartPage />} />
             <Route path="/checkout" element={<CheckoutPage />} />
             <Route path="/login" element={<LoginForm />} />
+            <Route path="/register" element={<RegisterForm />} />
+            
           </Routes>
         </main>
       </div>
