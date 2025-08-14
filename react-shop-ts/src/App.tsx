@@ -7,6 +7,7 @@ import styles from './App.module.css';
 import {ProductDetail} from "./features/products/ProductDetail.tsx";
 import { CartIcon } from './components/CartIcon.tsx';
 import { CheckoutPage } from './features/checkout/CheckoutPage.tsx';
+import { LoginForm } from './features/auth/LoginForm.tsx';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
             <Route path="/products/:id" element={<ProductDetail />} />
             <Route path="/cart" element={<CartPage />} />
             <Route path="/checkout" element={<CheckoutPage />} />
+            <Route path="/login" element={<LoginForm />} />
           </Routes>
         </main>
       </div>
