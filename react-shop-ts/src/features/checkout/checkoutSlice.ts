@@ -30,18 +30,27 @@ const checkoutSlice = createSlice({
       state.paymentMethod = action.payload;
       state.step = 3;
     },
-    placeOrder(state, action: PayloadAction<{items: CartItem[]; total: number}>) {
+    placeOrder(state, action: PayloadAction<{items: CartItem[]; total: number; subtotal: number, deliveryCost: number;}>) {
       if (!state.delivery || !state.paymentMethod) return;
       
       state.order = {
         id: Date.now().toString(),
         items: action.payload.items,
-        delivery: state.delivery,
+        delivery: {
+          ...state.delivery,
+          cost: action.payload.deliveryCost
+        },
         payment: state.paymentMethod,
         total: action.payload.total,
+        subtotal: action.payload.subtotal,
         createdAt: new Date().toISOString(),
       };
       state.step = 4;
+    },
+    prevStep(state) {
+      if (state.step > 1) {
+        state.step -= 1;
+      }
     },
     resetCheckout(state) {
       Object.assign(state, initialState);
@@ -54,6 +63,7 @@ export const {
   setPaymentMethod, 
   placeOrder,
   resetCheckout,
+    prevStep
 } = checkoutSlice.actions;
 
 export const checkoutReducer = checkoutSlice.reducer;

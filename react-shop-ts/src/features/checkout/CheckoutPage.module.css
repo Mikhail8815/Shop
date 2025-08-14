@@ -1,0 +1,51 @@
+.checkoutContainer {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    position: relative;
+    min-height: 60vh;
+}
+
+.backButtonContainer {
+    position: absolute;
+    left: 1.5rem;
+    top: 1.5rem;
+    z-index: 10;
+}
+
+.checkoutStep {
+    animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 768px) {
+    .checkoutContainer {
+        padding: 1rem;
+    }
+
+    .backButtonContainer {
+        left: 1rem;
+        top: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .checkoutContainer {
+        padding: 0.5rem;
+    }
+
+    .checkoutTitle {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+}

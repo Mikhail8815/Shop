@@ -8,6 +8,7 @@ export interface DeliveryData {
   postalCode: string;
   phone: string;
   email: string;
+  cost: number
 }
 
 export type PaymentMethod = 'card' | 'paypal' | 'cash';
@@ -18,5 +19,6 @@ export interface Order {
   delivery: DeliveryData;
   payment: PaymentMethod;
   total: number;
+  subtotal: number;
   createdAt: string;
 }
