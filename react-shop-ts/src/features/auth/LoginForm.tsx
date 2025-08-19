@@ -12,10 +12,8 @@ export const LoginForm = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    console.log('Начало отправки')
     try {
       await login(email, password)
-      console.log('Успешный вход:')
       navigate("/")
     } catch (err) {
         console.error("Login failed:", err)
@@ -25,7 +23,7 @@ export const LoginForm = () => {
 
    const getTranslatedError = () => {
     if (!error) return null
-    
+     if (error.includes('auth/invalid-credential')) return 'Неверный email или пароль'
     if (error.includes("auth/invalid-email")) return "Некорректный email"
     if (error.includes("auth/user-not-found")) return "Пользователь не найден"
     if (error.includes("auth/wrong-password")) return "Неверный пароль"
