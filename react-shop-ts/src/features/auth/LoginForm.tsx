@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useAuth } from "./hooks";
 import { useNavigate } from "react-router-dom";
+import styles from "./LoginForm.module.css";
 
 export const LoginForm = () => {
   const [email, setEmail] = useState("");
@@ -9,13 +10,16 @@ export const LoginForm = () => {
 
     const navigate = useNavigate();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    console.log('Начало отправки')
     try {
-       login(email, password)
-    navigate("/")
+      await login(email, password)
+      console.log('Успешный вход:')
+      navigate("/")
     } catch (err) {
         console.error("Login failed:", err)
+        
     }
   };
 
@@ -33,25 +37,50 @@ export const LoginForm = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
+    <form onSubmit={handleSubmit} className={styles.form}>
+      <div className={styles.formGroup}>
+        <input
         type="email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         placeholder="Email"
         required
+        className={styles.inputField}
+        disabled={status === "loading"}
       />
-      <input
+      </div>
+      <div className={styles.formGroup}>
+         <input
         type="password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
-        placeholder="Password"
+        placeholder="Пароль"
+        minLength={6}
+        className={styles.inputField}
         required
+        disabled={status === "loading"}
       />
-      <button type="submit" disabled={status === "loading"}>
-        {status === "loading" ? "Signing in..." : "Sign In"}
+      </div>
+    
+      <button type="submit" 
+      disabled={status === "loading"}
+      className={styles.submitButton}
+      >
+        {status === "loading" ? (
+          <>
+            <span className={styles.spinner}></span>
+            Вход...
+          </>
+        )
+        : 
+         "Войти" 
+         }
       </button>
-      {error && <div className="error">{error}</div>}
+      {error && (
+        <div className={styles.error}> 
+          ⚠️ {getTranslatedError()} 
+        </div>
+      )}
     </form>
   );
 };
