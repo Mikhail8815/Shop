@@ -7,9 +7,9 @@ import styles from './App.module.css';
 import {ProductDetail} from "./features/products/ProductDetail.tsx";
 import { CartIcon } from './components/CartIcon.tsx';
 import { CheckoutPage } from './features/checkout/CheckoutPage.tsx';
-import { RegisterForm } from './features/auth/RegisterForm.tsx';
 import { LoginPage } from './features/auth/LoginPage.tsx';
 import { RegisterPage } from './features/auth/RegisterPage.tsx';
+import { AuthButtons } from './features/auth/AuthButtons.tsx';
 
 function App() {
   return (
@@ -22,6 +22,7 @@ function App() {
             <CartIcon/>
             <span>Корзина</span>
             </Link>
+            <AuthButtons />
           </div>
         </nav>
         

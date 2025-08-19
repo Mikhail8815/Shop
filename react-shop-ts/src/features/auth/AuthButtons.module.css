@@ -1,0 +1,60 @@
+.authButtons {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-left: auto; 
+}
+
+.userEmail {
+  font-size: 0.9rem;
+  color: #555;
+  margin-right: 8px;
+}
+
+.authButton {
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: all 0.2s;
+  border: 1px solid #4285f4;
+}
+
+.authButton[href="/login"] {
+  color: #4285f4;
+  background: transparent;
+}
+
+.authButton[href="/register"] {
+  color: white;
+  background: #4285f4;
+}
+
+.logoutButton {
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  background: #f4f4f4;
+  color: #555;
+  border: 1px solid #ddd;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.authButton:hover,
+.logoutButton:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+@media (max-width: 768px) {
+  .authButtons {
+    gap: 8px;
+  }
+  
+  .authButton,
+  .logoutButton {
+    padding: 6px 12px;
+    font-size: 0.8rem;
+  }
+}
