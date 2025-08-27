@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "./hooks";
-import styles from './RegisterForm.module.css';
+import styles from "./RegisterForm.module.css";
 
 export const RegisterForm = () => {
   const [email, setEmail] = useState("");
@@ -9,7 +9,7 @@ export const RegisterForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [passwordError, setPasswordError] = useState("");
   const [emailError, setEmailError] = useState("");
-  
+
   const { register, status, error } = useAuth();
 
   useEffect(() => {
@@ -29,27 +29,33 @@ export const RegisterForm = () => {
   }, [password, confirmPassword]);
 
   const getPasswordStrength = () => {
-  if (!password) return "";
-  
-  if (password.length < 6) return "Слишком короткий";
-  
-  const hasUpperCase = /[А-ЯA-Z]/.test(password);
-  const hasNumbers = /[0-9]/.test(password);
-  const hasSpecialChars = /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/.test(password);
-  
-  if (hasUpperCase && hasNumbers && hasSpecialChars) {
-    return "Очень надежный"; 
-  } else if (hasUpperCase && hasNumbers) {
-    return "Надежный"; 
-  } else if (hasUpperCase || hasNumbers) {
-    return "Средний"; 
-  }
-  
-  return "Слабый"; 
-};
+    if (!password) return { text: "", level: "" };
+
+    if (password.length < 6)
+      return { text: "Слишком короткий", level: "too_short" };
+
+    const hasUpperCase = /[А-ЯA-Z]/.test(password);
+    const hasNumbers = /[0-9]/.test(password);
+    const hasSpecialChars = /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/.test(
+      password
+    );
+
+    if (hasUpperCase && hasNumbers && hasSpecialChars) {
+      return { text: "Очень надежный", level: "very_strong" };
+    } else if (hasUpperCase && hasNumbers) {
+      return { text: "Надежный", level: "strong" };
+    } else if (hasUpperCase || hasNumbers) {
+      return { text: "Средний", level: "medium" };
+    }
+
+    return { text: "Слабый", level: "weak" };
+  };
+
+  const strength = getPasswordStrength();
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (password !== confirmPassword) {
       setPasswordError("Passwords must match");
       return;
@@ -73,7 +79,9 @@ export const RegisterForm = () => {
           onChange={(e) => setEmail(e.target.value)}
           placeholder="example@mail.com"
           required
-          className={emailError ? styles.errorBorder : ""}
+          className={`${styles.inputField} ${
+            emailError ? styles.errorBorder : ""
+          }`}
         />
         {emailError && <span className={styles.errorText}>{emailError}</span>}
       </div>
@@ -89,7 +97,9 @@ export const RegisterForm = () => {
             placeholder="Минимум 6 символов"
             required
             minLength={6}
-            className={passwordError ? styles.errorBorder : ""}
+            className={`${styles.inputField} ${
+              passwordError ? styles.errorBorder : ""
+            }`}
           />
           <button
             type="button"
@@ -101,7 +111,8 @@ export const RegisterForm = () => {
           </button>
         </div>
         <div className={styles.passwordStrength}>
-          Надежность: <span className={getPasswordStrength().toLowerCase()}>{getPasswordStrength() || "—"}</span>
+          Надежность:{" "}
+          <span className={styles[strength.level]}>{strength.text || "—"}</span>
         </div>
       </div>
 
@@ -114,9 +125,13 @@ export const RegisterForm = () => {
           onChange={(e) => setConfirmPassword(e.target.value)}
           placeholder="Повторите пароль"
           required
-          className={passwordError ? styles.errorBorder : ""}
+          className={`${styles.inputField} ${
+            passwordError ? styles.errorBorder : ""
+          }`}
         />
-        {passwordError && <span className={styles.errorText}>{passwordError}</span>}
+        {passwordError && (
+          <span className={styles.errorText}>{passwordError}</span>
+        )}
       </div>
 
       <button

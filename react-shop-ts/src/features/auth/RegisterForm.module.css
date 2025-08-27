@@ -9,6 +9,7 @@
 
 .formGroup {
   margin-bottom: 1.5rem;
+  position: relative; 
 }
 
 .formGroup label {
@@ -19,7 +20,7 @@
 
 .inputField {
   width: 100%;
-  padding: 10px 36px 10px 12px; 
+  padding: 10px 40px 10px 12px; 
   border: 1px solid #ddd;
   border-radius: 4px;
   font-size: 1rem;
@@ -46,15 +47,20 @@
   justify-content: center;
   color: #666;
   outline: none !important;
-  
+  z-index: 2;
 }
 
 .togglePassword:focus {
-  box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.3);
-  border-radius: 50%;
+  outline: none;
+  box-shadow: none;
 }
+
 .togglePassword:hover {
   color: #333;
+}
+
+.togglePassword:active {
+  background-color: rgba(66, 133, 244, 0.15);
 }
 
 .errorBorder {
@@ -77,6 +83,10 @@
   font-weight: 500;
 }
 
+.passwordStrength .too_short {
+  color: #ff4444;
+}
+
 .passwordStrength .weak {
   color: #ff4444;
 }
@@ -87,6 +97,10 @@
 
 .passwordStrength .strong {
   color: #00C851;
+}
+
+.passwordStrength .very_strong {
+  color: #007E33;
 }
 
 .submitButton {
