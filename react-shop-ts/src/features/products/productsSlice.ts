@@ -8,6 +8,7 @@ const initialState: ProductsState = {
   categories: [] as string[],
   selectedCategory: '',
   status: 'idle'as LoadingStatus,
+  searchTerm: '',
   error: null,
 };
 
@@ -39,7 +40,10 @@ const productsSlice = createSlice({
   initialState,
   reducers: {
       setCategory: (state, action: PayloadAction<string>) => {
-      state.selectedCategory = action.payload;
+      state.selectedCategory = action.payload
+    },
+    setSearchTerm: (state, action: PayloadAction<string>) => {
+      state.searchTerm = action.payload.toLowerCase()
     },
   },
   extraReducers: (builder) => {
@@ -78,4 +82,4 @@ const productsSlice = createSlice({
 });
 
 export const productsReducer = productsSlice.reducer;
-export const { setCategory } = productsSlice.actions;
+export const { setCategory, setSearchTerm  } = productsSlice.actions;

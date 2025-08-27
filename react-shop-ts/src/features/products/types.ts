@@ -17,7 +17,8 @@ export interface ProductsState {
   status: LoadingStatus;
   error: string | null;
   categories: string[],
-  selectedCategory: string
+  selectedCategory: string, 
+  searchTerm: string
 }
 
 export interface Review {
