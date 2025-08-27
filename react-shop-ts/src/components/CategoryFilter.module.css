@@ -1,7 +1,8 @@
 .filterContainer {
   margin: 1rem 0;
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-start; 
+  width: 100%;
 }
 
 .select {
@@ -35,4 +36,12 @@
 
 .select option {
   padding: 0.5rem;
+}
+
+@media (min-width: 768px) {
+  .filterContainer {
+    justify-content: flex-start;
+    margin: 0;
+    width: auto;
+  }
 }

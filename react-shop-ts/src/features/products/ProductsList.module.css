@@ -55,6 +55,25 @@
   color: #007bff;
   margin: 0.5rem 0 1rem;
 }
+.filtersContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.noResults {
+  text-align: center;
+  padding: 40px 20px;
+  color: #6b7280;
+}
+
+.noResults h3 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #374151;
+}
 
 /* Сообщения о состоянии */
 .loadingMessage,
