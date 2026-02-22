@@ -1,8 +1,6 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import type { Review } from "../products/types";
 
-
-
 interface ReviewsState {
   byProductId: {
     [productId: number]: Review[];
