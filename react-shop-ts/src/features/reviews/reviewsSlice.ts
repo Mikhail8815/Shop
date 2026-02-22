@@ -27,7 +27,7 @@ const initialState: ReviewsState = {
         date: '2023-07-16T14:15:00Z'
       }
     ],
-    2: [ // Отзывы для другого товара
+    2: [
       {
         id: '3',
         productId: 2,
