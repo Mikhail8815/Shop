@@ -19,7 +19,7 @@ const reviewSchema = new mongoose.Schema({
         min: [1, 'Минимальная оценка - 1'],
         max: [5, 'Максимальная оценка - 5']
     },
-
+//dgdgdffава
     text: {
         type: String,
         required: [true, 'Текст отзыва обязателен'],
