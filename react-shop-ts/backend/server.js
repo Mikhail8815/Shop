@@ -1,27 +1,23 @@
-// backend/server.js
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 require('dotenv').config();
 
-// Импортируем роуты
 const reviewRoutes = require('./routes/reviews');
 
 const app = express();
 
 // Middleware
-app.use(cors()); // Разрешаем запросы с любых доменов (для разработки)
-app.use(express.json()); // Разбираем JSON в body запросов
+app.use(cors());
+app.use(express.json());
 
-// Подключаемся к MongoDB
 mongoose.connect(process.env.MONGODB_URI)
     .then(() => console.log('✅ Подключено к MongoDB Atlas'))
     .catch(err => {
         console.error('❌ Ошибка подключения к MongoDB:', err);
-        process.exit(1); // Выходим, если не можем подключиться к БД
+        process.exit(1);
     });
 
-// Базовый маршрут для проверки
 app.get('/', (req, res) => {
     res.json({
         message: '🚀 API отзывов работает',
@@ -33,15 +29,12 @@ app.get('/', (req, res) => {
     });
 });
 
-// Подключаем роуты
 app.use('/api', reviewRoutes);
 
-// Обработка 404
 app.use('/*splat', (req, res) => {
     res.status(404).json({ message: 'Маршрут не найден' });
 });
 
-// Обработка ошибок
 app.use((err, req, res, next) => {
     console.error('Необработанная ошибка:', err);
     res.status(500).json({ message: 'Внутренняя ошибка сервера' });
